@@ -1,0 +1,98 @@
+# Generated automatically from Makefile.in by configure.
+#
+# Pablio Makefile.in
+#
+# By: H. Gregory Silber
+#
+# WARNING: MODIFY THIS FILE AT YOUR OWN RISK.  THIS FILE SOON TO BE REMOVED
+# 	AND REPLACED WITH AUTO GENERATED FILES USING AUTOMAKE
+#	IF YOU MUST MODIFY THIS FILE, PLEASE NOTE YOUR CHANGES IN DETAIL
+#	DIRECTLY BENEATH THIS MESSAGE
+#
+
+PREFIX = /usr/local
+CC = cl
+CFLAGS = -Zi -I. -I../../include 
+LIBS = winmm.lib
+AR = /usr/bin/ar
+RANLIB = ranlib
+DLLTOOL=dlltool
+INSTALL = @INSTALL@
+SHARED_FLAGS = -DEBUG -DLL
+DLL_LIBS = winmm.lib
+TOOLROOT=
+LOCALOPT=
+LOCALLINK=
+LOCALDLINK=
+
+
+BASEFILENAME = pablio
+PABLIOLIB = libpablio.a
+PABLIODLL = pablio.dll
+PABLIODLLV = $(PABLIODLL)
+PAINC = pablio.h ringbuffer.h
+
+PAOBJS = \
+	pa_convert.o \
+	pa_lib.o \
+	pa_core.o
+
+OBJS = \
+	pablio.o \
+	ringbuffer.o
+
+GLOBAL_INCLUDES = \
+	../../include/pablio.h \
+	../../include/ringbuffer.h
+
+all: libs $(GLOBAL_INCLUDES) tests
+
+libs: buildstaticlib builddll
+
+builddll:../../lib/$(PABLIODLLV) $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
+	#
+$(BASEFILENAME).def:$(OBJS)
+	$(AR) x ../../lib/libportaudio.a
+	$(DLLTOOL) --export-all-symbols -z $(BASEFILENAME).def $(OBJS) $(PAOBJS)
+	rm -f $(PAOBJS)
+
+../../lib/$(PABLIODLLV).a:$(BASEFILENAME).def
+	$(DLLTOOL) --def $(BASEFILENAME).def --dllname $(PABLIODLLV) --output-lib ../../lib/$(PABLIODLLV).a
+
+buildsharedlib:../../lib/$(PABLIODLLV)
+
+buildstaticlib:../../lib/$(PABLIOLIB)
+
+../../lib/$(PABLIOLIB): $(OBJS) Makefile $(PAINC)
+	$(AR) x ../../lib/libportaudio.a
+	$(AR) ruv ../../lib/$(PABLIOLIB) $(OBJS) $(PAOBJS)
+	$(RANLIB) ../../lib/$(PABLIOLIB)
+	rm -f $(PAOBJS)
+	
+../../lib/$(PABLIODLLV): ../../lib/ $(OBJS) Makefile $(PAINC)
+	$(AR) x ../../lib/libportaudio.a
+	link $(SHARED_FLAGS) -OUT:../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS) $(LOCALOPT) $(LOCALDLINK)
+	rm -f $(PAOBJS)
+
+tests: FORCE
+	make -C tests
+
+
+
+clean:
+	rm -f $(OBJS) 
+	make -C tests clean
+
+distclean: 
+	rm -f $(OBJS) 
+	make -C tests distclean
+	rm -f ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
+	rm -f $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
+
+%.o: %.c Makefile $(PAINC)
+	$(CC) -c $(CFLAGS) $< -Fo$@ $(LOCALOPT)
+
+$(GLOBAL_INCLUDES) : ../../include/% : %
+	cp -f $(@F) ../../include/$(@F)
+
+FORCE:
