@@ -6,7 +6,7 @@
 #
 
 #subdirectories of the directory
-SUBDIRS=tests 
+CHILDDIRS=tests 
 
 #the path to the directory which contains configure for this directory
 CONFIGROOT=.
