@@ -20,26 +20,26 @@ SHARED_FLAGS = @SHARED_FLAGS@
 DLL_LIBS = @DLL_LIBS@
 
 
-TESTS = \
-	../bin/test_rw \
-	../bin/test_rw_echo \
-	../bin/test_w_saw8 \
-	../bin/test_w_saw \
-	../bin/passthru \
-	../bin/sine
+SOURCES = \
+	test_rw.c \
+	test_rw_echo.c \
+	test_w_saw8.c \
+	test_w_saw.c \
+	passthru.c \
+	sine.c
 
-all: tests
+EXECS = $(SOURCES:%.c=../bin/%@EXEEXT@)
 
-tests: $(TESTS)
+all: $(EXECS)
 
-$(TESTS): ../bin/%: Makefile %.c
+$(EXECS): ../bin/%@EXEEXT@: Makefile %.c
 	$(CC) -o $@ $(CFLAGS) $*.c -L../../../lib $(LIBS)
 
 clean:
 	echo No intermediate files here 
 
 distclean: clean
-	$(RM) -f $(TESTS)
+	cd ../bin;$(RM) -f $(EXECS);cd ../tests
 
-%.o: %.c Makefile $(PAINC)
+%.@OBJEXT@: %.c Makefile $(PAINC)
 	$(CC) -c $(CFLAGS) $< -o $@
