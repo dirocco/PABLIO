@@ -52,7 +52,7 @@ $(BASEFILENAME).def:$(OBJS)
 ../../lib/$(PABLIODLLV).a:$(BASEFILENAME).def
 	dlltool --def $(BASEFILENAME).def --dllname $(PABLIODLLV) --output-lib ../../lib/$(PABLIODLLV).a
 
-buildsharedlib:.../../lib/$(PABLIODLLV)
+buildsharedlib:../../lib/$(PABLIODLLV)
 
 buildstaticlib:../../lib/$(PABLIOLIB)
 
