@@ -1,5 +1,5 @@
 /*
- * $Id: pablio.c,v 1.2 2003/02/02 01:36:33 darreng Exp $
+ * $Id: pablio.c,v 1.3 2003/02/12 06:10:31 darreng Exp $
  * pablio.c
  * Portable Audio Blocking Input/Output utility.
  *
@@ -228,6 +228,18 @@ PaError OpenAudioStream( PABLIO_Stream **rwblPtr, double sampleRate,
      */
     minNumBuffers = 2 * Pa_GetMinNumBuffers( FRAMES_PER_BUFFER, sampleRate );
     numFrames = minNumBuffers * FRAMES_PER_BUFFER;
+    /* The PortAudio callback runs in a high priority thread. But PABLIO
+     * runs in a normal foreground thread. So we may have much worse
+     * latency in PABLIO. So adjust latency to a safe level.
+     */
+    {
+        const int safeLatencyMSec = 200;
+        int minLatencyMSec = (1000 * numFrames) / sampleRate;
+        if( minLatencyMSec < safeLatencyMSec )
+        {
+            numFrames = (int) ((safeLatencyMSec * sampleRate) / 1000);
+        }
+    }
     numFrames = RoundUpToNextPowerOf2( numFrames );
 
     /* Initialize Ring Buffers */
