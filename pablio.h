@@ -7,7 +7,7 @@ extern "C"
 #endif /* __cplusplus */
 
 /*
- * $Id: pablio.h,v 1.1 2003/01/15 08:52:51 gsilber Exp $
+ * $Id: pablio.h,v 1.2 2003/02/02 01:38:05 darreng Exp $
  * PABLIO.h
  * Portable Audio Blocking read/write utility.
  *
@@ -45,8 +45,8 @@ extern "C"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "ringbuffer.h"
 #include "portaudio.h"
+#include "ringbuffer.h"
 #include <string.h>
 
 typedef struct

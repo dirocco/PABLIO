@@ -1,5 +1,5 @@
 /*
- * $Id: pablio.c,v 1.1 2003/01/15 08:52:51 gsilber Exp $
+ * $Id: pablio.c,v 1.2 2003/02/02 01:36:33 darreng Exp $
  * pablio.c
  * Portable Audio Blocking Input/Output utility.
  *
@@ -32,6 +32,11 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
+ */
+
+/* History:
+ * PLB021214 - check for valid stream in CloseAudioStream() to prevent hang.
+ *             add timeOutMSec to CloseAudioStream() to prevent hang.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -278,28 +283,31 @@ error:
 /************************************************************/
 PaError CloseAudioStream( PABLIO_Stream *aStream )
 {
-    PaError err;
+    PaError err = paNoError;
     int bytesEmpty;
     int byteSize = aStream->outFIFO.bufferSize;
 
-    /* If we are writing data, make sure we play everything written. */
-    if( byteSize > 0 )
+    if( aStream->stream != NULL ) /* Make sure stream was opened. PLB021214 */
     {
-        bytesEmpty = RingBuffer_GetWriteAvailable( &aStream->outFIFO );
-        while( bytesEmpty < byteSize )
+        /* If we are writing data, make sure we play everything written. */
+        if( byteSize > 0 )
         {
-            Pa_Sleep( 10 );
+            int timeOutMSec = 2000;
             bytesEmpty = RingBuffer_GetWriteAvailable( &aStream->outFIFO );
+            while( (bytesEmpty < byteSize) && (timeOutMSec > 0) )
+            {
+                Pa_Sleep( 20 );
+                timeOutMSec -= 20;
+                bytesEmpty = RingBuffer_GetWriteAvailable( &aStream->outFIFO );
+            }
         }
+        err = Pa_StopStream( aStream->stream );
+        if( err != paNoError ) goto error;
+        err = Pa_CloseStream( aStream->stream );
     }
 
-    err = Pa_StopStream( aStream->stream );
-    if( err != paNoError ) goto error;
-    err = Pa_CloseStream( aStream->stream );
-    if( err != paNoError ) goto error;
-    Pa_Terminate();
-
 error:
+    Pa_Terminate();
     PABLIO_TermFIFO( &aStream->inFIFO );
     PABLIO_TermFIFO( &aStream->outFIFO );
     free( aStream );
