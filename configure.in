@@ -1,0 +1,75 @@
+dnl
+dnl PortAudio configure.in script
+dnl
+dnl Dominic Mazzoni
+dnl
+dnl Updated by: H. Gregory Silber on 1/14/03
+dnl
+
+dnl Require autoconf >= 2.13
+AC_PREREQ(2.13)
+
+dnl Init autoconf and make sure configure is being called
+dnl from the right directory (for autoconf executed by configure)
+AC_INIT([pablio.c])
+
+dnl Checks for programs
+AC_PROG_CC
+AC_PROG_LIBTOOL
+AC_PATH_PROG(AR, ar, no)
+if [[ $AR = "no" ]] ; then
+	AC_MSG_ERROR("Could not find ar - needed to create a library");
+fi
+
+dnl Extra variables we want to substitue
+AC_SUBST(PABLIODLL)
+AC_SUBST(SHARED_FLAGS)
+AC_SUBST(DLL_LIBS)
+
+dnl Determine the host operating system / platform
+
+case "${host_os}" in
+  darwin* )
+        dnl Mac OS X configuration
+        LIBS="-framework CoreAudio -lm";
+        PABLIODLL="libpablio.dylib.0.1";
+        SHARED_FLAGS="-framework CoreAudio -dynamiclib";
+        ;;
+
+  mingw* )
+        dnl MingW configuration
+        LIBS="-lwinmm -lm";
+        PABLIODLL="pablio.dll";
+        SHARED_FLAGS="-shared -mthreads";
+        DLL_LIBS="-lwinmm";
+        ;;
+
+  cygwin* )
+        dnl Cygwin configuration
+
+        LIBS="-lwinmm -lm";
+        PABLIODLL="pablio.dll";
+        SHARED_FLAGS="-shared -mthreads";
+        DLL_LIBS="-lwinmm";
+        ;;
+
+  *)
+        dnl Unix OSS configuration
+
+   	AC_CHECK_LIB(pthread, pthread_create,
+                ,
+        AC_MSG_ERROR([libpthread not found!]))
+
+        LIBS="-lm -lpthread";
+        PABLIODLL="libpablio.so.0.1";
+        SHARED_FLAGS="-shared";
+esac
+
+AC_OUTPUT([Makefile])
+
+echo ""
+echo "Finished configure."
+
+echo ""
+echo "Type 'make' to build PABLIO and examples."
+

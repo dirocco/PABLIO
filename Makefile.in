@@ -1,0 +1,78 @@
+#
+# Pablio Makefile.in
+#
+# By: H. Gregory Silber
+#
+# WARNING: MODIFY THIS FILE AT YOUR OWN RISK.  THIS FILE SOON TO BE REMOVED
+# 	AND REPLACED WITH AUTO GENERATED FILES USING AUTOMAKE
+#	IF YOU MUST MODIFY THIS FILE, PLEASE NOTE YOUR CHANGES IN DETAIL
+#	DIRECTLY BENEATH THIS MESSAGE
+#
+
+PREFIX = @prefix@
+CC = @CC@
+CFLAGS = @CFLAGS@ -I. -I../../include 
+LIBS = @LIBS@
+AR = @AR@
+RANLIB = @RANLIB@
+INSTALL = @INSTALL@
+SHARED_FLAGS = @SHARED_FLAGS@
+DLL_LIBS = @DLL_LIBS@
+
+
+PABLIOLIB = libpablio.a
+PABLIODLL = @PABLIODLL@
+PABLIODLLV = $(PABLIODLL)
+PAINC = pablio.h ringbuffer.h
+
+PAOBJS = \
+	pa_convert.o \
+	pa_lib.o \
+	pa_core.o
+
+OBJS = \
+	pablio.o \
+	ringbuffer.o
+
+GLOBAL_INCLUDES = \
+	../../include/pablio.h 
+
+TESTS = \
+	bin/test_rw \
+	bin/test_rw_echo \
+	bin/test_w_saw8 \
+	bin/test_w_saw 
+
+all: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) tests $(GLOBAL_INCLUDES)
+
+tests: $(TESTS)
+
+libs: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
+
+../../lib/$(PABLIOLIB): ../../lib/ $(OBJS) Makefile $(PAINC)
+	$(AR) x ../../lib/libportaudio.a
+	$(AR) ruv ../../lib/$(PABLIOLIB) $(OBJS) $(PAOBJS)
+	$(RANLIB) ../../lib/$(PABLIOLIB)
+	rm -f $(PAOBJS)
+
+../../lib/$(PABLIODLLV): ../../lib/ $(OBJS) Makefile $(PAINC)
+	$(AR) x ../../lib/libportaudio.a
+	$(CC) $(SHARED_FLAGS) -o ../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS)
+	rm -f $(PAOBJS)
+
+$(TESTS): bin/%: ../../lib/$(PABLIOLIB) Makefile $(PAINC) tests/%.c
+	$(CC) -o $@ $(CFLAGS) tests/$*.c ../../lib/$(PABLIOLIB) $(LIBS)
+
+clean:
+	rm -f $(OBJS) 
+
+distclean: clean
+	rm -f Makefile
+	rm -f $(TESTS) 
+	rm -f ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
+
+%.o: %.c Makefile $(PAINC)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(GLOBAL_INCLUDES) : ../../include/% : %
+	cp -f $(@F) ../../include/$(@F)
