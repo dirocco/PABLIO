@@ -15,9 +15,15 @@ CFLAGS = @CFLAGS@ -I. -I../../include
 LIBS = @LIBS@
 AR = @AR@
 RANLIB = @RANLIB@
+DLLTOOL=@DLLTOOL@
 INSTALL = @INSTALL@
 SHARED_FLAGS = @SHARED_FLAGS@
 DLL_LIBS = @DLL_LIBS@
+TOOLROOT=@TOOLROOT@
+LOCALOPT=@LOCALOPT@
+LOCALLINK=@LOCALLINK@
+LOCALDLINK=@LOCALDLINK@
+
 
 BASEFILENAME = pablio
 PABLIOLIB = libpablio.a
@@ -46,11 +52,11 @@ builddll:../../lib/$(PABLIODLLV) $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
 	#
 $(BASEFILENAME).def:$(OBJS)
 	$(AR) x ../../lib/libportaudio.a
-	dlltool --export-all-symbols -z $(BASEFILENAME).def $(OBJS) $(PAOBJS)
+	$(DLLTOOL) --export-all-symbols -z $(BASEFILENAME).def $(OBJS) $(PAOBJS)
 	rm -f $(PAOBJS)
 
 ../../lib/$(PABLIODLLV).a:$(BASEFILENAME).def
-	dlltool --def $(BASEFILENAME).def --dllname $(PABLIODLLV) --output-lib ../../lib/$(PABLIODLLV).a
+	$(DLLTOOL) --def $(BASEFILENAME).def --dllname $(PABLIODLLV) --output-lib ../../lib/$(PABLIODLLV).a
 
 buildsharedlib:../../lib/$(PABLIODLLV)
 
@@ -64,7 +70,7 @@ buildstaticlib:../../lib/$(PABLIOLIB)
 	
 ../../lib/$(PABLIODLLV): ../../lib/ $(OBJS) Makefile $(PAINC)
 	$(AR) x ../../lib/libportaudio.a
-	$(CC) $(SHARED_FLAGS) -o ../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS)
+	$(CC) $(SHARED_FLAGS) -o ../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS) $(LOCALOPT) $(LOCALDLINK)
 	rm -f $(PAOBJS)
 
 tests: FORCE
@@ -83,7 +89,7 @@ distclean:
 	rm -f $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
 
 %.o: %.c Makefile $(PAINC)
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@ $(LOCALOPT)
 
 $(GLOBAL_INCLUDES) : ../../include/% : %
 	cp -f $(@F) ../../include/$(@F)
