@@ -19,7 +19,7 @@ INSTALL = @INSTALL@
 SHARED_FLAGS = @SHARED_FLAGS@
 DLL_LIBS = @DLL_LIBS@
 
-
+BASEFILENAME = pablio
 PABLIOLIB = libpablio.a
 PABLIODLL = @PABLIODLL@
 PABLIODLLV = $(PABLIODLL)
@@ -38,23 +38,39 @@ GLOBAL_INCLUDES = \
 	../../include/pablio.h \
 	../../include/ringbuffer.h
 
-all: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES) tests
+all: libs $(GLOBAL_INCLUDES) tests
 
-tests: FORCE
-	make -C tests
+libs: @STATIC_LIB_CONDITIONAL@ @SHARED_LIB_CONDITIONAL@
 
-libs: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
+builddll:../../lib/$(PABLIODLLV) $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
+	#
+$(BASEFILENAME).def:$(OBJS)
+	$(AR) x ../../lib/libportaudio.a
+	dlltool --export-all-symbols -z $(BASEFILENAME).def $(OBJS) $(PAOBJS)
+	rm -f $(PAOBJS)
 
-../../lib/$(PABLIOLIB): ../../lib/ $(OBJS) Makefile $(PAINC)
+../../lib/$(PABLIODLLV).a:$(BASEFILENAME).def
+	dlltool --def $(BASEFILENAME).def --dllname $(PABLIODLLV) --output-lib ../../lib/$(PABLIODLLV).a
+
+buildsharedlib:.../../lib/$(PABLIODLLV)
+
+buildstaticlib:../../lib/$(PABLIOLIB)
+
+../../lib/$(PABLIOLIB): $(OBJS) Makefile $(PAINC)
 	$(AR) x ../../lib/libportaudio.a
 	$(AR) ruv ../../lib/$(PABLIOLIB) $(OBJS) $(PAOBJS)
 	$(RANLIB) ../../lib/$(PABLIOLIB)
 	rm -f $(PAOBJS)
-
+	
 ../../lib/$(PABLIODLLV): ../../lib/ $(OBJS) Makefile $(PAINC)
 	$(AR) x ../../lib/libportaudio.a
 	$(CC) $(SHARED_FLAGS) -o ../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS)
 	rm -f $(PAOBJS)
+
+tests: FORCE
+	make -C tests
+
+
 
 clean:
 	rm -f $(OBJS) 
@@ -64,6 +80,7 @@ distclean:
 	rm -f $(OBJS) 
 	make -C tests distclean
 	rm -f ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
+	rm -f $(BASEFILENAME).def ../../lib/$(PABLIODLLV).a
 
 %.o: %.c Makefile $(PAINC)
 	$(CC) -c $(CFLAGS) $< -o $@
