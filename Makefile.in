@@ -62,7 +62,6 @@ clean:
 
 distclean: 
 	rm -f $(OBJS) 
-	rm -f Makefile
 	make -C tests distclean
 	rm -f ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
 
