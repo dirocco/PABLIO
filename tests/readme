@@ -1,5 +1,2 @@
 This directory includes trivial PABLIO examples for dynamicaly synthesizing 
 audio (sine.c) and dynamicaly processing audio (passthru.c).
-
-The makefile should be edited to provide the correct paths to your system's
-compiler, linker, headers, libraries and tools!
