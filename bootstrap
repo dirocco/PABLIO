@@ -34,16 +34,16 @@ fi
 ACLOCAL="aclocal"
 ACLOCAL_FILES="aclocal.m4"
 ALWAYS_CLEAN="config.log config.status libtool config.cache"
-AUTOCONF="autoconf"
+AUTOCONF="autoconf" 
 AUTOCONF_FILES="configure"
 AUTOHEADER=""
 AUTOHEADER_FILES=""
-AUTOMAKE="automake --add-missing"
+AUTOMAKE="automake --add-missing --copy"
 AUTOMAKE_FILES="mkinstalldirs missing config.sub stamp-h.in config.guess ltmain.sh"
 CONFIG_AUX_DIR="."
 CONFIG_FILES="stamp-h ltconfig"
 CONFIG_HEADER=""
-LIBTOOLIZE="libtoolize --force "
+LIBTOOLIZE="libtoolize --force --copy "
 LIBTOOLIZE_FILES="config.sub config.guess ltmain.sh"
 RM="rm --verbose"
 SUBDIRS="."
@@ -68,8 +68,6 @@ if test x"$1" = x"--clean"; then
 		test -f $cf && \
 		$RM $cf
 	done
-	#aclocal.m4 created by aclocal
-	test -f $ACLOCAL_FILES && $RM $ACLOCAL_FILES
 	#Clean Autoheader Generated files
 	for cf in $AUTOHEADER_FILES; do
 		cf=$CONFIG_AUX_DIR$cf
@@ -82,7 +80,7 @@ if test x"$1" = x"--clean"; then
 	for cf in $AUTOMAKE_FILES; do
 		cf=$CONFIG_AUX_DIR$cf
 		test -f $cf && \
-		$RM $cf
+		$RM -f $cf
 	done
 	#Autoconf generated files
 	for cf in $AUTOCONF_FILES; do
@@ -94,13 +92,15 @@ if test x"$1" = x"--clean"; then
 		test -f $cf && \
 		$RM $cf
 	done
-	$RM -r autom4te*
 else
 	$LIBTOOLIZE > /dev/null
 	$ACLOCAL
 	$AUTOHEADER
 	#$AUTOMAKE
 	$AUTOCONF
+	#aclocal.m4 created by aclocal
+	test -f $ACLOCAL_FILES && $RM $ACLOCAL_FILES
+	$RM -r -f autom4te*
 fi
 
 
