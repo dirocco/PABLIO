@@ -78,8 +78,8 @@ tests: FORCE
 
 dist:
 	$(TOPDIR)/bin/tbmaker $(TYPE) $(TOPDIR)/distro/ $(TOPDIR)/dirt
-	make -c tests dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
-	make -c bin   dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
+	make -C tests dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
+	make -C bin   dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
 
 clean:
 	rm -f $(OBJS) 
