@@ -39,8 +39,7 @@ clean:
 	echo No intermediate files here 
 
 distclean: clean
-	rm -f Makefile
-	rm -f $(TESTS)
+	$(RM) -f $(TESTS)
 
 %.o: %.c Makefile $(PAINC)
 	$(CC) -c $(CFLAGS) $< -o $@
