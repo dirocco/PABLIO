@@ -1,0 +1,25 @@
+src_v1       README.TXT       src_v1.tar       AudioAnecdotesV1/src/pablio/bin/README.TXT
+
+bin_v1_win   passthru.exe     bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/passthru.exe
+bin_v1_mac   passthru         bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/passthru
+bin_v1_linux passthru         bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/passthru
+ 
+bin_v1_win   sine.exe         bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/sine.exe
+bin_v1_mac   sine             bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/sine
+bin_v1_linux sine             bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/sine
+
+bin_v1_win   test_rw.exe      bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/test_rw.exe
+bin_v1_mac   test_rw          bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/test_rw
+bin_v1_linux test_rw          bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/test_rw
+
+bin_v1_win   test_rw_echo.exe bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/test_rw_echo.exe
+bin_v1_mac   test_rw_echo     bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/test_rw_echo
+bin_v1_linux test_rw_echo     bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/test_rw_echo
+
+bin_v1_win   test_w_saw.exe   bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/test_w_saw.exe
+bin_v1_mac   test_w_saw       bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/test_w_saw
+bin_v1_linux test_w_saw       bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/test_w_saw
+
+bin_v1_win   test_w_saw8.exe  bin_v1_win.tar   AudioAnecdotesV1/src/pablio/bin/test_w_saw8.exe
+bin_v1_mac   test_w_saw8      bin_v1_mac.tar   AudioAnecdotesV1/src/pablio/bin/test_w_saw8
+bin_v1_linux test_w_saw8      bin_v1_linux.tar AudioAnecdotesV1/src/pablio/bin/test_w_saw8
