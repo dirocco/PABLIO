@@ -41,7 +41,9 @@ TESTS = \
 	bin/test_rw \
 	bin/test_rw_echo \
 	bin/test_w_saw8 \
-	bin/test_w_saw 
+	bin/test_w_saw \
+	bin/passthru \
+	bin/sine
 
 all: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) tests $(GLOBAL_INCLUDES)
 
