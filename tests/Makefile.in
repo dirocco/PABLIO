@@ -41,6 +41,10 @@ all: $(EXECS)
 $(EXECS): ../bin/%@EXEEXT@: Makefile %.c
 	$(CC) -o $@ $(CFLAGS) $*.c -L../../../lib $(LIBS) $(LDFLAGS) $(LOCALOPT) $(LOCALLINK)
 
+dist:
+	$(TOPDIR)/bin/tbmaker $(TYPE) $(TOPDIR)/distro/ $(TOPDIR)/dirt
+
+
 clean:
 	echo No intermediate files here 
 

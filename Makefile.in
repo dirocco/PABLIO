@@ -76,7 +76,10 @@ buildstaticlib:../../lib/$(PABLIOLIB)
 tests: FORCE
 	make -C tests
 
-
+dist:
+	$(TOPDIR)/bin/tbmaker $(TYPE) $(TOPDIR)/distro/ $(TOPDIR)/dirt
+	make -c tests dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
+	make -c bin   dist TOPDIR=$(TOPDIR) TYPE=$(TYPE)
 
 clean:
 	rm -f $(OBJS) 
