@@ -31,7 +31,7 @@ PABLIODLL = @PABLIODLL@
 PABLIODLLV = $(PABLIODLL)
 PAINC = pablio.h ringbuffer.h
 
-PAOBJS = $(shell $(AR) t ../../lib/libportaudio.a)
+PAOBJS = $(shell $(AR) t ../../lib/libportaudio.a | grep pa_)
 
 OBJS = \
 	pablio.o \
