@@ -1,5 +1,5 @@
 /*
- * $Id: pablio.c,v 1.3 2003/02/12 06:10:31 darreng Exp $
+ * $Id: pablio.c,v 1.4 2003/04/29 02:28:49 darreng Exp $
  * pablio.c
  * Portable Audio Blocking Input/Output utility.
  *
@@ -234,7 +234,7 @@ PaError OpenAudioStream( PABLIO_Stream **rwblPtr, double sampleRate,
      */
     {
         const int safeLatencyMSec = 200;
-        int minLatencyMSec = (1000 * numFrames) / sampleRate;
+        int minLatencyMSec = (int) ((1000 * numFrames) / sampleRate);
         if( minLatencyMSec < safeLatencyMSec )
         {
             numFrames = (int) ((safeLatencyMSec * sampleRate) / 1000);
