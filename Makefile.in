@@ -35,19 +35,13 @@ OBJS = \
 	ringbuffer.o
 
 GLOBAL_INCLUDES = \
-	../../include/pablio.h 
+	../../include/pablio.h \
+	../../include/ringbuffer.h
 
-TESTS = \
-	bin/test_rw \
-	bin/test_rw_echo \
-	bin/test_w_saw8 \
-	bin/test_w_saw \
-	bin/passthru \
-	bin/sine
+all: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES) tests
 
-all: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) tests $(GLOBAL_INCLUDES)
-
-tests: $(TESTS)
+tests: FORCE
+	make -C tests
 
 libs: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
 
@@ -62,15 +56,14 @@ libs: ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
 	$(CC) $(SHARED_FLAGS) -o ../../lib/$(PABLIODLLV) $(OBJS) $(PAOBJS) $(DLL_LIBS)
 	rm -f $(PAOBJS)
 
-$(TESTS): bin/%: ../../lib/$(PABLIOLIB) Makefile $(PAINC) tests/%.c
-	$(CC) -o $@ $(CFLAGS) tests/$*.c ../../lib/$(PABLIOLIB) $(LIBS)
-
 clean:
 	rm -f $(OBJS) 
+	make -C tests clean
 
-distclean: clean
+distclean: 
+	rm -f $(OBJS) 
 	rm -f Makefile
-	rm -f $(TESTS) 
+	make -C tests distclean
 	rm -f ../../lib/$(PABLIOLIB) ../../lib/$(PABLIODLLV) $(GLOBAL_INCLUDES)
 
 %.o: %.c Makefile $(PAINC)
@@ -78,3 +71,5 @@ distclean: clean
 
 $(GLOBAL_INCLUDES) : ../../include/% : %
 	cp -f $(@F) ../../include/$(@F)
+
+FORCE:
