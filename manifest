@@ -1,35 +1,47 @@
 src_v1 config.mak     src_v1.tar Volume1/src/pablio/config.mak
 src_v2 config.mak     src_v2.tar Volume2/src/pablio/config.mak
+src_v3 config.mak     src_v3.tar Volume3/src/pablio/config.mak
 
 src_v1 configure      src_v1.tar Volume1/src/pablio/configure
 src_v2 configure      src_v2.tar Volume2/src/pablio/configure
+src_v3 configure      src_v3.tar Volume3/src/pablio/configure
 
 src_v1 install-sh     src_v1.tar Volume1/src/pablio/install-sh
 src_v2 install-sh     src_v2.tar Volume2/src/pablio/install-sh
+src_v3 install-sh     src_v3.tar Volume3/src/pablio/install-sh
 
 src_v1 ltmain.sh      src_v1.tar Volume1/src/pablio/ltmain.sh
 src_v2 ltmain.sh      src_v2.tar Volume2/src/pablio/ltmain.sh
+src_v3 ltmain.sh      src_v3.tar Volume3/src/pablio/ltmain.sh
 
 src_v1 Makefile.in    src_v1.tar Volume1/src/pablio/Makefile.in
 src_v2 Makefile.in    src_v2.tar Volume2/src/pablio/Makefile.in
+src_v3 Makefile.in    src_v3.tar Volume3/src/pablio/Makefile.in
 
 src_v1 Makefile.win32 src_v1.tar Volume1/src/pablio/Makefile.win32
 src_v2 Makefile.win32 src_v2.tar Volume2/src/pablio/Makefile.win32
+src_v3 Makefile.win32 src_v3.tar Volume3/src/pablio/Makefile.win32
 
 src_v1 pablio.c       src_v1.tar Volume1/src/pablio/pablio.c
 src_v2 pablio.c       src_v2.tar Volume2/src/pablio/pablio.c
+src_v3 pablio.c       src_v3.tar Volume3/src/pablio/pablio.c
 
 src_v1 pablio.h       src_v1.tar Volume1/src/pablio/pablio.h
 src_v2 pablio.h       src_v2.tar Volume2/src/pablio/pablio.h
+src_v3 pablio.h       src_v3.tar Volume3/src/pablio/pablio.h
 
 src_v1 pablio.o       src_v1.tar Volume1/src/pablio/pablio.o
 src_v2 pablio.o       src_v2.tar Volume2/src/pablio/pablio.o
+src_v3 pablio.o       src_v3.tar Volume3/src/pablio/pablio.o
 
 src_v1 README.TXT     src_v1.tar Volume1/src/pablio/README.TXT
 src_v2 README.TXT     src_v2.tar Volume2/src/pablio/README.TXT
+src_v3 README.TXT     src_v3.tar Volume3/src/pablio/README.TXT
 
 src_v1 ringbuffer.c   src_v1.tar Volume1/src/pablio/ringbuffer.c
 src_v2 ringbuffer.c   src_v2.tar Volume2/src/pablio/ringbuffer.c
+src_v3 ringbuffer.c   src_v3.tar Volume3/src/pablio/ringbuffer.c
 
 src_v1 ringbuffer.h   src_v1.tar Volume1/src/pablio/ringbuffer.h
 src_v2 ringbuffer.h   src_v2.tar Volume2/src/pablio/ringbuffer.h
+src_v3 ringbuffer.h   src_v3.tar Volume3/src/pablio/ringbuffer.h
