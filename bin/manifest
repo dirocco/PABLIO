@@ -10,6 +10,7 @@ bin_v3_win   passthru.exe     bin_v3_win.tar   Volume3/src/pablio/bin/passthru.e
 bin_v1_mac   passthru         bin_v1_mac.tar   Volume1/src/pablio/bin/passthru
 bin_v2_mac   passthru         bin_v2_mac.tar   Volume2/src/pablio/bin/passthru
 bin_v3_mac   passthru         bin_v3_mac.tar   Volume3/src/pablio/bin/passthru
+bin_v3_macx86 passthru        bin_v3_macx86.tar Volume3/src/pablio/bin/passthru
 
 bin_v1_linux passthru         bin_v1_linux.tar Volume1/src/pablio/bin/passthru
 bin_v2_linux passthru         bin_v2_linux.tar Volume2/src/pablio/bin/passthru
@@ -23,6 +24,7 @@ bin_v3_win   sine.exe         bin_v3_win.tar   Volume3/src/pablio/bin/sine.exe
 bin_v1_mac   sine             bin_v1_mac.tar   Volume1/src/pablio/bin/sine
 bin_v2_mac   sine             bin_v2_mac.tar   Volume2/src/pablio/bin/sine
 bin_v3_mac   sine             bin_v3_mac.tar   Volume3/src/pablio/bin/sine
+bin_v3_macx86 sine            bin_v3_macx86.tar Volume3/src/pablio/bin/sine
 
 bin_v1_linux sine             bin_v1_linux.tar Volume1/src/pablio/bin/sine
 bin_v2_linux sine             bin_v2_linux.tar Volume2/src/pablio/bin/sine
@@ -36,6 +38,7 @@ bin_v3_win   test_rw.exe      bin_v3_win.tar   Volume3/src/pablio/bin/test_rw.ex
 bin_v1_mac   test_rw          bin_v1_mac.tar   Volume1/src/pablio/bin/test_rw
 bin_v2_mac   test_rw          bin_v2_mac.tar   Volume2/src/pablio/bin/test_rw
 bin_v3_mac   test_rw          bin_v3_mac.tar   Volume3/src/pablio/bin/test_rw
+bin_v3_macx86 test_rw         bin_v3_macx86.tar Volume3/src/pablio/bin/test_rw
 
 bin_v1_linux test_rw          bin_v1_linux.tar Volume1/src/pablio/bin/test_rw
 bin_v2_linux test_rw          bin_v2_linux.tar Volume2/src/pablio/bin/test_rw
@@ -49,6 +52,7 @@ bin_v3_win   test_rw_echo.exe bin_v3_win.tar   Volume3/src/pablio/bin/test_rw_ec
 bin_v1_mac   test_rw_echo     bin_v1_mac.tar   Volume1/src/pablio/bin/test_rw_echo
 bin_v2_mac   test_rw_echo     bin_v2_mac.tar   Volume2/src/pablio/bin/test_rw_echo
 bin_v3_mac   test_rw_echo     bin_v3_mac.tar   Volume3/src/pablio/bin/test_rw_echo
+bin_v3_macx86 test_rw_echo    bin_v3_macx86.tar Volume3/src/pablio/bin/test_rw_echo
 
 bin_v1_linux test_rw_echo     bin_v1_linux.tar Volume1/src/pablio/bin/test_rw_echo
 bin_v2_linux test_rw_echo     bin_v2_linux.tar Volume2/src/pablio/bin/test_rw_echo
@@ -62,6 +66,7 @@ bin_v3_win   test_w_saw.exe   bin_v3_win.tar   Volume3/src/pablio/bin/test_w_saw
 bin_v1_mac   test_w_saw       bin_v1_mac.tar   Volume1/src/pablio/bin/test_w_saw
 bin_v2_mac   test_w_saw       bin_v2_mac.tar   Volume2/src/pablio/bin/test_w_saw
 bin_v3_mac   test_w_saw       bin_v3_mac.tar   Volume3/src/pablio/bin/test_w_saw
+bin_v3_macx86 test_w_saw      bin_v3_macx86.tar Volume3/src/pablio/bin/test_w_saw
 
 bin_v1_linux test_w_saw       bin_v1_linux.tar Volume1/src/pablio/bin/test_w_saw
 bin_v2_linux test_w_saw       bin_v2_linux.tar Volume2/src/pablio/bin/test_w_saw
@@ -75,6 +80,7 @@ bin_v3_win   test_w_saw8.exe  bin_v3_win.tar   Volume3/src/pablio/bin/test_w_saw
 bin_v1_mac   test_w_saw8      bin_v1_mac.tar   Volume1/src/pablio/bin/test_w_saw8
 bin_v2_mac   test_w_saw8      bin_v2_mac.tar   Volume2/src/pablio/bin/test_w_saw8
 bin_v3_mac   test_w_saw8      bin_v3_mac.tar   Volume3/src/pablio/bin/test_w_saw8
+bin_v3_macx86 test_w_saw8     bin_v3_macx86.tar Volume3/src/pablio/bin/test_w_saw8
 
 bin_v1_linux test_w_saw8      bin_v1_linux.tar Volume1/src/pablio/bin/test_w_saw8
 bin_v2_linux test_w_saw8      bin_v2_linux.tar Volume2/src/pablio/bin/test_w_saw8
